@@ -37,7 +37,7 @@ _
 sub complete_riap_url {
     my %args = @_;
 
-    my $word = $args{word} // '/';
+    my $word = $args{word} // ''; $word = '/' if !length($word);
     my $type = $args{type} // '';
 
     my $scheme;
