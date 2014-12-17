@@ -12,6 +12,11 @@ require Exporter;
 our @ISA       = qw(Exporter);
 our @EXPORT_OK = qw(complete_riap_url);
 
+$SPEC{':package'} = {
+    v => 1.1,
+    summary => 'Riap-related completion routines',
+};
+
 $SPEC{complete_riap_url} = {
     v => 1.1,
     summary => 'Complete Riap URL',
@@ -75,7 +80,7 @@ sub complete_riap_url {
 }
 
 1;
-#ABSTRACT: Riap-related completion routines
+#ABSTRACT:
 
 =head1 SYNOPSIS
 
