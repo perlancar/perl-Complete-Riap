@@ -48,6 +48,9 @@ _
             schema => ['str*', in=>['function','package']], # XXX other types?
             summary => 'Filter by entity type',
         },
+        riap_client => {
+            schema => 'obj*',
+        },
     },
     result_naked => 1,
 };
@@ -81,10 +84,11 @@ sub complete_riap_url {
         list_func => sub {
             my ($path, $intdir, $isint) = @_;
 
-            state $pa = do {
+            state $default_pa = do {
                 require Perinci::Access;
                 Perinci::Access->new;
             };
+            my $pa = $args{riap_client} // $default_pa;
 
             $path = "/$path" unless $path =~ m!\A/!;
             my $riap_res = $pa->request(list => $path, {detail=>1});
