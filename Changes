@@ -1,5 +1,14 @@
 Revision history for Complete-Riap
 
+0.02    2014-12-25 (PERLANCAR)
+
+	- Use Complete::Path, to avoid code duplication and gain feature
+	  like case-insensitive matching, map case, and expand immediate
+	  paths.
+
+	- Follow convention of Complete 0.06.
+
+
 0.01     2014-12-02 (PERLANCAR)
 
          - First release.
