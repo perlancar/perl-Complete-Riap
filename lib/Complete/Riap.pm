@@ -119,9 +119,4 @@ sub complete_riap_url {
  # -> {word=>['/Template/', '/Test/', '/Text/'], path_sep=>'/'}
 
 
-=head1 TODO
-
-'ci' option (this should perhaps be implemented in
-L<Perinci::Access::Schemeless>?).
-
 =cut
