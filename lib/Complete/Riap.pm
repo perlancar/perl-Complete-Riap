@@ -44,6 +44,9 @@ _
         exp_im_path => {
             schema => 'bool',
         },
+        dig_leaf => {
+            schema => 'bool',
+        },
         type => {
             schema => ['str*', in=>['function','package']], # XXX other types?
             summary => 'Filter by entity type',
@@ -64,6 +67,7 @@ sub complete_riap_url {
     my $ci          = $args{ci} // $Complete::OPT_CI;
     my $map_case    = $args{map_case} // $Complete::OPT_MAP_CASE;
     my $exp_im_path = $args{exp_im_path} // $Complete::OPT_EXP_IM_PATH;
+    my $dig_leaf    = $args{dig_leaf} // $Complete::OPT_DIG_LEAF;
     my $type = $args{type} // '';
 
     my $starting_path;
@@ -80,7 +84,12 @@ sub complete_riap_url {
 
     my $res = Complete::Path::complete_path(
         word => $word,
-        ci => $ci, map_case => $map_case, exp_im_path => $exp_im_path,
+
+        ci => $ci,
+        map_case => $map_case,
+        exp_im_path => $exp_im_path,
+        dig_leaf => $dig_leaf,
+
         list_func => sub {
             my ($path, $intdir, $isint) = @_;
 
