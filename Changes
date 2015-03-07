@@ -1,5 +1,11 @@
 Revision history for Complete-Riap
 
+0.05    2015-03-07 (PERLANCAR)
+
+	- Default dig_leaf to 0 instead of Complete::OPT_DIG_LEAF to avoid
+	  slowness and error-proneness.
+
+
 0.04    2015-01-13 (PERLANCAR)
 
 	- Add option: dig_leaf.
