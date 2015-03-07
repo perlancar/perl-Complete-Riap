@@ -46,6 +46,12 @@ _
         },
         dig_leaf => {
             schema => 'bool',
+            description => <<'_',
+
+Unlike in Complete::Path, `dig_leaf` defaults to 0 because require modules
+recursively is slow and prone to compile errors.
+
+_
         },
         type => {
             schema => ['str*', in=>['function','package']], # XXX other types?
@@ -67,7 +73,7 @@ sub complete_riap_url {
     my $ci          = $args{ci} // $Complete::OPT_CI;
     my $map_case    = $args{map_case} // $Complete::OPT_MAP_CASE;
     my $exp_im_path = $args{exp_im_path} // $Complete::OPT_EXP_IM_PATH;
-    my $dig_leaf    = $args{dig_leaf} // $Complete::OPT_DIG_LEAF;
+    my $dig_leaf    = $args{dig_leaf} // 0; #$Complete::OPT_DIG_LEAF;
     my $type = $args{type} // '';
 
     my $starting_path;
