@@ -7,7 +7,7 @@ use 5.010001;
 use strict;
 use warnings;
 
-use Complete;
+use Complete::Setting;
 
 our %SPEC;
 require Exporter;
@@ -70,10 +70,10 @@ sub complete_riap_url {
 
     my $word = $args{word} // ''; $word = '/' if !length($word);
     $word = "/$word" unless $word =~ m!\A/!;
-    my $ci          = $args{ci} // $Complete::OPT_CI;
-    my $map_case    = $args{map_case} // $Complete::OPT_MAP_CASE;
-    my $exp_im_path = $args{exp_im_path} // $Complete::OPT_EXP_IM_PATH;
-    my $dig_leaf    = $args{dig_leaf} // 0; #$Complete::OPT_DIG_LEAF;
+    my $ci          = $args{ci} // $Complete::Setting::OPT_CI;
+    my $map_case    = $args{map_case} // $Complete::Setting::OPT_MAP_CASE;
+    my $exp_im_path = $args{exp_im_path} // $Complete::Setting::OPT_EXP_IM_PATH;
+    my $dig_leaf    = $args{dig_leaf} // 0; #$Complete::Setting::OPT_DIG_LEAF;
     my $type = $args{type} // '';
 
     my $starting_path;
