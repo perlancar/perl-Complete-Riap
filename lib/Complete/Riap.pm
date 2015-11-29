@@ -7,7 +7,7 @@ use 5.010001;
 use strict;
 use warnings;
 
-use Complete::Setting;
+use Complete::Common qw(:all);
 
 our %SPEC;
 require Exporter;
@@ -29,30 +29,7 @@ Currently only support local Perl schemes (e.g. `/Pkg/Subpkg/function` or
 
 _
     args => {
-        word => {
-            schema => 'str*',
-            req => 1,
-            pos => 0,
-        },
-        ci => {
-            summary => 'Whether to do case-insensitive search',
-            schema  => 'bool*',
-        },
-        map_case => {
-            schema => 'bool',
-        },
-        exp_im_path => {
-            schema => 'bool',
-        },
-        dig_leaf => {
-            schema => 'bool',
-            description => <<'_',
-
-Unlike in Complete::Path, `dig_leaf` defaults to 0 because require modules
-recursively is slow and prone to compile errors.
-
-_
-        },
+        %arg_word,
         type => {
             schema => ['str*', in=>['function','package']], # XXX other types?
             summary => 'Filter by entity type',
@@ -70,10 +47,6 @@ sub complete_riap_url {
 
     my $word = $args{word} // ''; $word = '/' if !length($word);
     $word = "/$word" unless $word =~ m!\A/!;
-    my $ci          = $args{ci} // $Complete::Setting::OPT_CI;
-    my $map_case    = $args{map_case} // $Complete::Setting::OPT_MAP_CASE;
-    my $exp_im_path = $args{exp_im_path} // $Complete::Setting::OPT_EXP_IM_PATH;
-    my $dig_leaf    = $args{dig_leaf} // 0; #$Complete::Setting::OPT_DIG_LEAF;
     my $type = $args{type} // '';
 
     my $starting_path;
@@ -90,12 +63,6 @@ sub complete_riap_url {
 
     my $res = Complete::Path::complete_path(
         word => $word,
-
-        ci => $ci,
-        map_case => $map_case,
-        exp_im_path => $exp_im_path,
-        dig_leaf => $dig_leaf,
-
         list_func => sub {
             my ($path, $intdir, $isint) = @_;
 
